@@ -1,7 +1,6 @@
 import Timeline from './components/Timeline'
 import TopicFilter from './components/TopicFilter'
 import SerendipityCard from './components/SerendipityCard'
-import ReviewSection from './components/ReviewSection'
 import { useLearningMemos } from './hooks/useLearningMemos'
 import { useSerendipity } from './hooks/useSerendipity'
 import { useSRS } from './hooks/useSRS'
@@ -9,7 +8,7 @@ import { useSRS } from './hooks/useSRS'
 function App() {
   const { memos, allMemos, topics, selectedTopic, setSelectedTopic, setMemos } = useLearningMemos()
   const { currentResult, selectedMode, shuffleMemo, changeMode } = useSerendipity(allMemos)
-  const { handleReviewComplete, toggleImportant } = useSRS(allMemos, setMemos)
+  const { toggleImportant } = useSRS(allMemos, setMemos)
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -26,16 +25,11 @@ function App() {
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <aside className="lg:col-span-1 space-y-6">
+          <aside className="lg:col-span-1">
             <TopicFilter
               topics={topics}
               selectedTopic={selectedTopic}
               onTopicSelect={setSelectedTopic}
-            />
-            
-            <ReviewSection
-              memos={allMemos}
-              onReviewComplete={handleReviewComplete}
             />
           </aside>
           

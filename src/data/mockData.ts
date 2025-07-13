@@ -1,5 +1,4 @@
 import { LearningMemo } from '../types/memo'
-import { getDateAfterDays } from '../utils/srsAlgorithm'
 
 export const mockMemos: LearningMemo[] = [
   {
@@ -11,14 +10,7 @@ export const mockMemos: LearningMemo[] = [
     topics: ['マーケティング', 'フレームワーク', 'ビジネス戦略'],
     createdAt: '2024-01-15T10:30:00Z',
     summary: 'マーケティングの基本となる4P理論の概要',
-    isImportant: true,
-    srs: {
-      easeFactor: 2.5,
-      interval: 1,
-      repetitions: 0,
-      nextReviewDate: new Date().toISOString(),
-      lastReviewDate: '2024-01-15T10:30:00Z'
-    }
+    isImportant: true
   },
   {
     id: '2',
@@ -39,14 +31,7 @@ export const mockMemos: LearningMemo[] = [
     topics: ['アジャイル', 'スクラム', 'プロジェクト管理', '開発手法'],
     createdAt: '2024-02-05T09:15:00Z',
     summary: 'スクラム手法の基本構造とイベント',
-    isImportant: true,
-    srs: {
-      easeFactor: 2.3,
-      interval: 3,
-      repetitions: 1,
-      nextReviewDate: getDateAfterDays(2),
-      lastReviewDate: '2024-02-05T09:15:00Z'
-    }
+    isImportant: true
   },
   {
     id: '4',

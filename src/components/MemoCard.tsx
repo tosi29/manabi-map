@@ -1,6 +1,5 @@
 import { LearningMemo } from '../types/memo'
-import { CalendarDays, ExternalLink, BookOpen, Star, Calendar } from 'lucide-react'
-import { getDaysUntilReview } from '../utils/srsAlgorithm'
+import { CalendarDays, ExternalLink, BookOpen, Star } from 'lucide-react'
 
 interface MemoCardProps {
   memo: LearningMemo
@@ -16,8 +15,6 @@ function MemoCard({ memo, onToggleImportant }: MemoCardProps) {
       day: 'numeric'
     })
   }
-
-  const daysUntilReview = memo.srs ? getDaysUntilReview(memo.srs) : null
 
   return (
     <article className={`bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow duration-200 ${
@@ -49,14 +46,6 @@ function MemoCard({ memo, onToggleImportant }: MemoCardProps) {
         </div>
       </div>
 
-      {memo.isImportant && daysUntilReview !== null && (
-        <div className="flex items-center mb-3 text-sm">
-          <Calendar className="w-3 h-3 mr-1 text-yellow-600" />
-          <span className="text-yellow-700">
-            {daysUntilReview <= 0 ? '復習期限' : `${daysUntilReview}日後に復習`}
-          </span>
-        </div>
-      )}
 
       {memo.summary && (
         <p className="text-gray-600 text-sm mb-3 font-medium">
