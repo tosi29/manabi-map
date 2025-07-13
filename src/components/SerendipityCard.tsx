@@ -1,12 +1,15 @@
-import { LearningMemo } from '../types/memo'
-import { Shuffle, CalendarDays, BookOpen, ExternalLink } from 'lucide-react'
+import { Shuffle, CalendarDays, BookOpen, ExternalLink, Brain, TrendingUp, Link2, Sparkles } from 'lucide-react'
+import { SerendipityMode, SerendipityResult } from '../utils/learningCurveAnalysis'
 
 interface SerendipityCardProps {
-  memo: LearningMemo | null
+  result: SerendipityResult | null
+  selectedMode: SerendipityMode
   onShuffle: () => void
+  onModeChange: (mode: SerendipityMode) => void
 }
 
-function SerendipityCard({ memo, onShuffle }: SerendipityCardProps) {
+function SerendipityCard({ result, selectedMode, onShuffle, onModeChange }: SerendipityCardProps) {
+  const memo = result?.memo
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('ja-JP', {
@@ -16,12 +19,35 @@ function SerendipityCard({ memo, onShuffle }: SerendipityCardProps) {
     })
   }
 
+  const getModeIcon = (mode: SerendipityMode) => {
+    switch (mode) {
+      case 'forgetting-curve': return <Brain className="w-4 h-4" />
+      case 'related': return <Link2 className="w-4 h-4" />
+      case 'growth': return <TrendingUp className="w-4 h-4" />
+      case 'intelligent': return <Sparkles className="w-4 h-4" />
+      default: return <Shuffle className="w-4 h-4" />
+    }
+  }
+
+  const getModeLabel = (mode: SerendipityMode) => {
+    switch (mode) {
+      case 'forgetting-curve': return '忘却曲線'
+      case 'related': return '関連性'
+      case 'growth': return '成長実感'
+      case 'intelligent': return 'インテリジェント'
+      default: return 'ランダム'
+    }
+  }
+
   return (
     <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg border border-purple-200 p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-900 flex items-center">
-          <Shuffle className="w-5 h-5 mr-2 text-purple-600" />
-          今日のセレンディピティ
+          {getModeIcon(selectedMode)}
+          <span className="ml-2">今日のセレンディピティ</span>
+          <span className="ml-2 text-sm font-normal text-purple-600">
+            ({getModeLabel(selectedMode)})
+          </span>
         </h2>
         <button
           onClick={onShuffle}
@@ -32,8 +58,35 @@ function SerendipityCard({ memo, onShuffle }: SerendipityCardProps) {
         </button>
       </div>
 
+      {/* モード選択 */}
+      <div className="mb-4">
+        <div className="flex flex-wrap gap-2">
+          {(['intelligent', 'forgetting-curve', 'related', 'growth', 'random'] as SerendipityMode[]).map((mode) => (
+            <button
+              key={mode}
+              onClick={() => onModeChange(mode)}
+              className={`flex items-center text-xs px-3 py-1 rounded-full transition-colors ${
+                selectedMode === mode
+                  ? 'bg-purple-200 text-purple-800'
+                  : 'bg-white text-purple-600 hover:bg-purple-100'
+              }`}
+            >
+              {getModeIcon(mode)}
+              <span className="ml-1">{getModeLabel(mode)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {memo ? (
         <div className="space-y-3">
+          {/* 選択理由の表示 */}
+          {result?.reason && (
+            <div className="bg-purple-100 text-purple-800 text-xs p-2 rounded-lg">
+              💡 {result.reason}
+            </div>
+          )}
+          
           <h3 className="font-medium text-gray-900">{memo.title}</h3>
           
           <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">

@@ -8,7 +8,7 @@ import { useSRS } from './hooks/useSRS'
 
 function App() {
   const { memos, allMemos, topics, selectedTopic, setSelectedTopic, setMemos } = useLearningMemos()
-  const { currentMemo, shuffleMemo } = useSerendipity(allMemos)
+  const { currentResult, selectedMode, shuffleMemo, changeMode } = useSerendipity(allMemos)
   const { handleReviewComplete, toggleImportant } = useSRS(allMemos, setMemos)
 
   return (
@@ -41,8 +41,10 @@ function App() {
           
           <section className="lg:col-span-3 space-y-6">
             <SerendipityCard
-              memo={currentMemo}
+              result={currentResult}
+              selectedMode={selectedMode}
               onShuffle={shuffleMemo}
+              onModeChange={changeMode}
             />
             
             <Timeline 
