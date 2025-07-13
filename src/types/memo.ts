@@ -7,6 +7,17 @@ export interface LearningMemo {
   topics: string[]
   createdAt: string
   summary?: string
+  isImportant?: boolean
+  srs?: SRSData
+}
+
+export interface SRSData {
+  easeFactor: number
+  interval: number
+  repetitions: number
+  nextReviewDate: string
+  lastReviewDate?: string
+  quality?: number
 }
 
 export interface Topic {

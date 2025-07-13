@@ -1,12 +1,12 @@
-import React from 'react'
 import { LearningMemo } from '../types/memo'
 import MemoCard from './MemoCard'
 
 interface TimelineProps {
   memos: LearningMemo[]
+  onToggleImportant?: (memoId: string) => void
 }
 
-function Timeline({ memos }: TimelineProps) {
+function Timeline({ memos, onToggleImportant }: TimelineProps) {
   const sortedMemos = [...memos].sort((a, b) => 
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   )
@@ -29,7 +29,11 @@ function Timeline({ memos }: TimelineProps) {
       
       <div className="space-y-4">
         {sortedMemos.map((memo) => (
-          <MemoCard key={memo.id} memo={memo} />
+          <MemoCard 
+            key={memo.id} 
+            memo={memo} 
+            onToggleImportant={onToggleImportant}
+          />
         ))}
       </div>
     </div>

@@ -34,8 +34,10 @@ export function useLearningMemos() {
 
   return {
     memos: filteredMemos,
+    allMemos: memos,
     topics,
     selectedTopic,
-    setSelectedTopic
+    setSelectedTopic,
+    setMemos
   }
 }

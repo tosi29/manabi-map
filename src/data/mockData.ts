@@ -1,4 +1,5 @@
 import { LearningMemo } from '../types/memo'
+import { getDateAfterDays } from '../utils/srsAlgorithm'
 
 export const mockMemos: LearningMemo[] = [
   {
@@ -9,7 +10,15 @@ export const mockMemos: LearningMemo[] = [
     sourceUrl: 'https://example.com/marketing-book',
     topics: ['マーケティング', 'フレームワーク', 'ビジネス戦略'],
     createdAt: '2024-01-15T10:30:00Z',
-    summary: 'マーケティングの基本となる4P理論の概要'
+    summary: 'マーケティングの基本となる4P理論の概要',
+    isImportant: true,
+    srs: {
+      easeFactor: 2.5,
+      interval: 1,
+      repetitions: 0,
+      nextReviewDate: new Date().toISOString(),
+      lastReviewDate: '2024-01-15T10:30:00Z'
+    }
   },
   {
     id: '2',
@@ -29,7 +38,15 @@ export const mockMemos: LearningMemo[] = [
     sourceUrl: 'https://scrumguides.org',
     topics: ['アジャイル', 'スクラム', 'プロジェクト管理', '開発手法'],
     createdAt: '2024-02-05T09:15:00Z',
-    summary: 'スクラム手法の基本構造とイベント'
+    summary: 'スクラム手法の基本構造とイベント',
+    isImportant: true,
+    srs: {
+      easeFactor: 2.3,
+      interval: 3,
+      repetitions: 1,
+      nextReviewDate: getDateAfterDays(2),
+      lastReviewDate: '2024-02-05T09:15:00Z'
+    }
   },
   {
     id: '4',
@@ -39,7 +56,8 @@ export const mockMemos: LearningMemo[] = [
     sourceUrl: 'https://basarat.gitbook.io/typescript/',
     topics: ['TypeScript', 'プログラミング', '型システム', 'JavaScript'],
     createdAt: '2024-02-12T16:20:00Z',
-    summary: 'TypeScriptの高度な型システムの活用方法'
+    summary: 'TypeScriptの高度な型システムの活用方法',
+    isImportant: false
   },
   {
     id: '5',

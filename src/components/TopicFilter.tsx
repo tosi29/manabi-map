@@ -1,4 +1,3 @@
-import React from 'react'
 import { Topic } from '../types/memo'
 import { Hash, X } from 'lucide-react'
 
