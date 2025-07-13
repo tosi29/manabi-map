@@ -33,18 +33,18 @@ function App() {
               onTopicSelect={setSelectedTopic}
             />
             
-            <SerendipityCard
-              memo={currentMemo}
-              onShuffle={shuffleMemo}
-            />
-            
             <ReviewSection
               memos={allMemos}
               onReviewComplete={handleReviewComplete}
             />
           </aside>
           
-          <section className="lg:col-span-3">
+          <section className="lg:col-span-3 space-y-6">
+            <SerendipityCard
+              memo={currentMemo}
+              onShuffle={shuffleMemo}
+            />
+            
             <Timeline 
               memos={memos} 
               onToggleImportant={toggleImportant}
