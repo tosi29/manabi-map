@@ -102,3 +102,48 @@ These can be adjusted based on user behavior, but maintain some randomness to pr
 
 ### Data Integration Notes
 When moving beyond mock data, preserve the simplicity of the `LearningMemo` interface. Avoid complex metadata that would require additional management UI.
+
+## Language and Communication
+
+- **Primary Language**: All UI text and user communication should be in Japanese (日本語)
+- **User Instruction Context**: User typically communicates in Japanese, reflecting the target audience
+- **Content Philosophy**: The platform is designed for Japanese learners who value natural, intuitive discovery over systematic study methods
+
+## Key Technical Decisions & Rationale
+
+### Layout Evolution
+- **Initial Serendipity Placement**: Serendipity was initially in the sidebar
+- **Current Placement**: Moved to main content area (top of 3-column section) for better visibility and prominence
+- **Reasoning**: Serendipity is the core feature and deserves primary visual attention
+
+### Topic Extraction Strategy
+- Topics are manually defined in mock data but auto-extraction is planned
+- Current topics include: マーケティング, React, アジャイル, TypeScript, デザインシステム
+- Topics drive both filtering and serendipity relationship algorithms
+
+### Mock Data Design
+- 6 carefully crafted memos spanning different time periods (Jan-Mar 2024)
+- Mix of technical (React, TypeScript) and business (Marketing, Agile) topics
+- Realistic content length and structure for algorithm testing
+- Some memos marked as `isImportant: true` to test star functionality
+
+## User Experience Patterns
+
+### Serendipity Interaction Flow
+1. User sees serendipity card prominently at top of main content
+2. Can switch between 5 discovery modes via button selection
+3. Shuffle button provides instant gratification with new discovery
+4. Reasoning explanation builds understanding of why content was selected
+5. Natural progression to browsing timeline below
+
+### Star Marking Philosophy
+- Stars (`isImportant`) are the primary curation mechanism
+- Unlike traditional bookmarking, stars indicate "worth rediscovering"
+- Starred content may appear more frequently in certain serendipity modes
+- Visual distinction through yellow highlighting maintains subtle presence
+
+### Timeline Interaction
+- Chronological browsing as secondary discovery method
+- Star marking available directly on memo cards
+- Filtered view respects topic selection from sidebar
+- Responsive design accommodates mobile browsing patterns
